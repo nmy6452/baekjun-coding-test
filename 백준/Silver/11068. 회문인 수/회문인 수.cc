@@ -1,41 +1,49 @@
 #include <iostream>
 #include <string>
 using namespace std;
-const int MIN = 2;
-const int MAX = 64;
-bool isPalindrome(int N)
-{
-    for (int b = MIN; b <= MAX; b++)
-    {
-        int num = N;
-        string s;
-        while (num)
-        {
-            s.push_back(num % b);
-            num /= b;
-        }
-        string reverseS;
-        for (int i = s.length() - 1; i >= 0; i--)
-        {
-            reverseS += s[i];
-        }
-        if (s == reverseS)
-        {
-            return true;
-        }
-    }
-    return false;
+string base(int a, int b);
+bool rev(int num);
+
+int main() {
+	int T;
+	cin >> T;
+
+	for (int i = 0; i < T; i++)
+	{
+		int temp;
+		cin >> temp;
+		cout << rev(temp) << "\n";
+	}
 }
 
-int main(void)
+string base(int a,int b)
 {
-    int T;
-    cin >> T;
-    for (int t = 0; t < T; t++)
-    {
-        int N;
-        cin >> N;
-        cout << isPalindrome(N) << "\n";
-    }
-    return 0;
+	string temp;
+	while (a)
+	{
+		temp.push_back(a % b);
+		a = a / b;
+	}
+	return temp;
+}
+
+bool rev(int num)
+{
+	for (int i = 2; i < 65; i++)
+	{
+		string temp = base(num, i);
+		string temp_rev;
+
+		for(int i = temp.length()-1; i >= 0; i--)
+		{
+			temp_rev = temp_rev + temp[i];
+		}
+		if (temp_rev == temp)
+		{
+			return true;
+		}
+
+	}
+	return false;
+	
 }
